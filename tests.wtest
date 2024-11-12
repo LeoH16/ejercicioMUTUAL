@@ -1,0 +1,55 @@
+import miMutual.*
+
+describe "Pruebas de Mutual"
+{
+    const excCiudad1 = new ExcursionACiudad(idiomas = #{"español", "esperanto"}, cantAtracciones = 4)
+    const excCiudad2 = new ExcursionACiudad(idiomas = #{"español", "esperanto"}, cantAtracciones = 8)
+
+    const excCiudadTropical1 = new ExcursionACiudadTropical(idiomas = #{"español", "esperanto"}, cantAtracciones = 4)
+    const excCiudadTropical2 = new ExcursionACiudadTropical(idiomas = #{"español", "esperanto"}, cantAtracciones = 8)
+    const excCiudadTropical3 = new ExcursionACiudadTropical(idiomas = #{"español", "esperanto"}, cantAtracciones = 10)
+
+    const salidaTrekking1 = new SalidaTrekking(idiomas = #{"español", "esperanto"}, kmDeSenderos = 100, diasDeSol = 130)
+
+    test "Excursión a ciudad normal con 4 atracciones lleva 2 días, no implica esfuerzo ni sirve para broncearse"
+    {
+        assert.equals(excCiudad1.diasQueLleva(), 2)
+        assert.notThat(excCiudad1.implicaEsfuerzo())
+        assert.notThat(excCiudad1.sirveParaBroncearse())
+    }
+
+    test "Excursión a ciudad tropical con 4 atracciones lleva 3 días, no implica esfuerzo y sirve para broncearse"
+    {
+        assert.equals(excCiudadTropical1.diasQueLleva(), 3)
+        assert.notThat(excCiudadTropical1.implicaEsfuerzo())
+        assert.that(excCiudadTropical1.sirveParaBroncearse())
+    }
+
+    test "Excursión a ciudad normal con 8 atracciones lleva 4 días, implica esfuerzo y no sirve para broncearse"
+    {
+        assert.equals(excCiudad2.diasQueLleva(), 4)
+        assert.that(excCiudad2.implicaEsfuerzo())
+        assert.notThat(excCiudad2.sirveParaBroncearse())
+    }
+
+    test "Excursión a ciudad tropical con 8 atracciones lleva 5 días, implica esfuerzo y sirve para broncearse"
+    {
+        assert.equals(excCiudadTropical2.diasQueLleva(), 5)
+        assert.that(excCiudadTropical2.implicaEsfuerzo())
+        assert.that(excCiudadTropical2.sirveParaBroncearse())
+    }
+
+    test "Excursión a ciudad tropical con 10 atracciones lleva 6 días, no implica esfuerzo y sirve para broncearse"
+    {
+        assert.equals(excCiudadTropical3.diasQueLleva(), 6)
+        assert.notThat(excCiudadTropical3.implicaEsfuerzo())
+        assert.that(excCiudadTropical3.sirveParaBroncearse())
+    }
+
+    test "Salida de trekking de 100 km y 130 de sol lleva 2 días, implica esfuerzo y no sirve para broncearse"
+    {
+        assert.equals(salidaTrekking1.diasQueLleva(), 2)
+        assert.that(salidaTrekking1.implicaEsfuerzo())
+        assert.notThat(salidaTrekking1.sirveParaBroncearse())
+    }
+}
